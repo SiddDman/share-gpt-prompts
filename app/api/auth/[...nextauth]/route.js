@@ -22,7 +22,7 @@ const handler = NextAuth({
             }
         },
 
-        async signIn({ profile }) {
+        async signIn({ account, profile, user, credentials }) {
             try {
                 await connectToDB()
                 //check if a user already exists
