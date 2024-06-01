@@ -61,7 +61,7 @@ const EditPrompt = () => {
 const Page = () => {
   return (
     <Suspense>
-      <updatePrompt />
+      <EditPrompt />
     </Suspense>
   );
 };
