@@ -22,7 +22,7 @@ const Feed = () => {
   const [searchedResults, setSearchedResults] = useState([]);
 
   const fetchPrompts = async () => {
-    const response = await fetch("/api/prompts");
+    const response = await fetch("/api/prompt");
     const data = await response.json();
     setPrompts(data);
   };
