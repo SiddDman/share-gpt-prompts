@@ -6,7 +6,7 @@ import Profile from "@components/Profile";
 
 const MyProfile = () => {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [prompts, setPrompts] = useState([]);
 
   useEffect(() => {
@@ -39,13 +39,6 @@ const MyProfile = () => {
       }
     }
   };
-
-  // Redirect to homepage if user is not signed in
-  if (status === "loading") return null; // Render nothing while loading
-  if (!session) {
-    router.push("/");
-    return null; // Render nothing if redirecting
-  }
 
   return (
     <Profile

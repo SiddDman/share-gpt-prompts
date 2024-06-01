@@ -3,13 +3,13 @@
 import Form from "@components/Form";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { useSession, getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const EditPrompt = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [post, setPost] = useState({ prompt: "", tag: "" });
   const [submitting, setSubmitting] = useState(false);
 
@@ -49,12 +49,6 @@ const EditPrompt = () => {
     }
   };
 
-  // Redirect to homepage if user is not signed in
-  if (status === "loading") return null; // Render nothing while loading
-  if (!session) {
-    router.push("/");
-    return null; // Render nothing if redirecting
-  }
 
   return (
     <Form
