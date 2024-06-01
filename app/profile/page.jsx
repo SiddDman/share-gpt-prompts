@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Profile from "@components/Profile";
+import { Router } from "next/router";
 
 const MyProfile = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const [prompts, setPrompts] = useState([]);
 
@@ -17,9 +19,11 @@ const MyProfile = () => {
     if (session?.user.id) fetchPrompts();
   }, []);
 
-  const handleEdit = () => {};
+  const handleEdit = (prompt) => {
+    router.push(`/update-prompt?id=${prompt._id}`);
+  };
 
-  const handleDelete = async () => {};
+  const handleDelete = async (prompt) => {};
 
   return (
     <Profile

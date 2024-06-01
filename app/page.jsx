@@ -9,7 +9,7 @@ const Home = () => {
         <span className="orange_gradient text-center">AI-Powered Prompts</span>
       </h1>
       <p className="desc text-center">
-        Prompt Share is an open-source A1 prompting tool for modern world to
+        Prompt Share is an open-source AI prompting tool for modern world to
         discover, create and share creative prompts
       </p>
 
