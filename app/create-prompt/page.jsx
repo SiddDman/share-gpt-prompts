@@ -1,13 +1,13 @@
 "use client";
 
 import Form from "@components/Form";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const CreatePrompt = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({ prompt: "", tag: "" });
@@ -35,6 +35,14 @@ const CreatePrompt = () => {
       setSubmitting(false);
     }
   };
+
+  // Redirect to homepage if user is not signed in
+  if (status === "loading") return null; // Render nothing while loading
+  if (!session) {
+    router.push("/");
+    return null; // Render nothing if redirecting
+  }
+  
   return (
     <Form
       type="Create"
