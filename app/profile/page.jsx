@@ -6,8 +6,15 @@ import Profile from "@components/Profile";
 
 const MyProfile = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [prompts, setPrompts] = useState([]);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/"); // Redirect to the login page if not authenticated
+    }
+  }, [status, router]);
 
   useEffect(() => {
     const fetchPrompts = async () => {

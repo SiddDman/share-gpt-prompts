@@ -6,9 +6,16 @@ import { useState } from "react";
 
 const CreatePrompt = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  // const { data: session} = useSession();
+  const { data: session, status } = useSession();
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({ prompt: "", tag: "" });
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/"); // Redirect to the login page if not authenticated
+    }
+  }, [status, router]);
 
   const createPrompt = async (e) => {
     e.preventDefault();

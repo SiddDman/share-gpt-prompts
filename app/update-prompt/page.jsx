@@ -9,9 +9,16 @@ const EditPrompt = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [post, setPost] = useState({ prompt: "", tag: "" });
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/"); // Redirect to the login page if not authenticated
+    }
+  }, [status, router]);
 
   useEffect(() => {
     const getPromptDetails = async () => {
@@ -48,7 +55,6 @@ const EditPrompt = () => {
       setSubmitting(false);
     }
   };
-
 
   return (
     <Form
